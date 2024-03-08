@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'store/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container-fluid">
+        <!-- Фоновое изображение на весь экран -->
+        <div class="row">
+            <div class="col-md-12"
+                 style="height: 100vh; background-image: url({% static 'images/first_background.jpg' %}); background-size: cover; background-position: center;">
+                <!-- Заголовок и слоган -->
+                <div class="jumbotron jumbotron-fluid text-white" style="background-color: rgba(0, 0, 0, 0.5);">
+                    <!-- Прозрачный фон для текста -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 text-left">
+                                <h1 class="display-4">Название вашего ресторана</h1>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <p class="lead">Ваш слоган здесь</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Здесь можете добавить дополнительный контент -->
+    </div>
+{% endblock %}
