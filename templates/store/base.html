@@ -3,15 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Название сайта{% endblock %}</title>
+    <title>{% block title %}E3Boomas{% endblock %}</title>
     <!-- Подключение Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* CSS для фиксированного навбара */
+        body {
+            padding-top: 56px;
+        }
+        @media (min-width: 992px) {
+            body {
+                padding-top: 70px;
+            }
+        }
+        /* Настройка цвета и стилей навбара */
+        .navbar-custom {
+            background-color: #343a40; /* Цвет фона */
+            color: #ffffff; /* Цвет текста */
+        }
+        .navbar-custom .navbar-brand, .navbar-custom .navbar-nav .nav-link {
+            color: #ffffff; /* Цвет ссылок и текста бренда */
+        }
+        .navbar-custom .navbar-nav .nav-link:hover {
+            color: #aaaaaa; /* Цвет ссылок при наведении */
+        }
+    </style>
 </head>
 <body>
     <!-- Хедер сайта -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Название вашего сайта</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navbar-custom">
+            <a class="navbar-brand" href="#">E3Boomas</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -19,13 +41,13 @@
                 <ul class="navbar-nav ml-auto">
                     <!--пункты меню -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Главная</a>
+                        <a class="nav-link" href="#">home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">О нас</a>
+                        <a class="nav-link" href="#">about</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Контакты</a>
+                        <a class="nav-link" href="#">contact us</a>
                     </li>
                 </ul>
             </div>
@@ -40,11 +62,37 @@
     </main>
 
     <!-- Футер сайта -->
-    <footer class="footer mt-auto py-3 bg-light">
-        <div class="container text-center">
-            <span class="text-muted">Здесь можете разместить информацию о копирайте и т.д.</span>
+<footer class="footer mt-auto py-3 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h5>Контакты</h5>
+                <p>Телефон: +48 451 694 419</p>
+                <p>Email: info@example.com</p>
+            </div>
+            <div class="col-lg-4">
+                <h5>Полезные ссылки</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <h5>Подписаться</h5>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Введите ваш email">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Подписаться</button>
+                </form>
+            </div>
         </div>
-    </footer>
+    </div>
+    <div class="container text-center mt-3">
+        <span class="text-muted">© 2024 Название вашего сайта</span>
+    </div>
+</footer>
 
     <!-- Подключение Bootstrap JS и скриптов -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
