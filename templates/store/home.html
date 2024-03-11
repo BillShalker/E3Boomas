@@ -1,16 +1,24 @@
 {% extends 'store/base.html' %}
-
-
+{% load static %}
 {% block content %}
-    <div class="container-fluid">
-        <!-- Фоновое изображение на весь экран -->
-        <div class="row">
-            <div class="col-md-12 background-image">
+    <div class="container-fluid ">
+    <!-- Фоновое изображение на весь экран -->
+    <div class="row">
+        <div class="col-md-12 background-image">
+            <!-- Заголовок и слоган -->
+            <div class="jumbotron jumbotron-fluid text-white text-center">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">E3Bomaas</h1>
+                        <p class="lead">Kebab - Smakowita Podróż do Orientu!</p>
+                    </div>
+                </div>
                 <!-- Заголовок и слоган -->
                 <div class="jumbotron jumbotron-fluid text-white text-center">
                     <div class="container">
-                        <h1 class="display-4">Название вашего ресторана</h1>
-                        <p class="lead">Ваш слоган здесь</p>
+                        <p class="lead ">Odwiedź naszą niezwykłą kebabową restaurację - pierwszą w Warszawie! Oferujemy
+                            niepowtarzalny smak Orientu, który rozgrzeje Twoje podniebienie. Przyjdź i odkryj unikalne
+                            połączenie tradycyjnych przypraw i świeżych składników w naszych autorskich kebabach.</p>
                     </div>
                 </div>
             </div>
@@ -34,20 +42,24 @@
                 </div>
             {% endfor %}
         </div>
-{% load static %}
     </div>
+
     <style>
-    .background-image {
-        height: 100vh;
-        background-image: url({% static 'images/other/first_background.jpg' %});
-        background-size: cover;
-        background-position: center;
-    }
+        .navbar {
+            margin-bottom: -20px; /* Устанавливаем отрицательный отступ для навбара */
+        }
 
-    .jumbotron {
-        background-color: rgba(0, 0, 0, 0.0);
-    }
-</style>
+        .background-image {
+            margin-top: -20px; /* Устанавливаем отрицательный отступ для изображения */
+            height: calc(100vh + 20px); /* Учитываем отрицательный отступ */
+            background-image: url({% static 'images/other/first_background.jpg' %});
+            background-size: cover;
+            background-position: center;
+        }
+        
+
+        .jumbotron {
+            background-color: rgba(0, 0, 0, 0.0);
+        }
+    </style>
 {% endblock %}
-
-
