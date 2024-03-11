@@ -1,5 +1,5 @@
 {% extends 'store/base.html' %}
-{% load static %}
+
 
 {% block content %}
     <div class="container-fluid">
@@ -22,7 +22,8 @@
                 <div class="col-lg-4 mb-4">
                     <div class="card">
                         <img src="{{ MEDIA_URL }}{{ product.picture.url }}" class="card-img-top"
-                             alt="{{ product.title }}">
+                             alt="{{ product.title }}" height="100%">
+
                         <div class="card-body">
                             <h5 class="card-title">{{ product.title }}</h5>
                             <p class="card-text">{{ product.description }}</p>
@@ -33,10 +34,9 @@
                 </div>
             {% endfor %}
         </div>
+{% load static %}
     </div>
-{% endblock %}
-
-<style>
+    <style>
     .background-image {
         height: 100vh;
         background-image: url({% static 'images/other/first_background.jpg' %});
@@ -45,6 +45,9 @@
     }
 
     .jumbotron {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.0);
     }
 </style>
+{% endblock %}
+
+
