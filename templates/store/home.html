@@ -1,65 +1,110 @@
 {% extends 'store/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="container-fluid ">
-    <!-- Фоновое изображение на весь экран -->
-    <div class="row">
-        <div class="col-md-12 background-image">
-            <!-- Заголовок и слоган -->
-            <div class="jumbotron jumbotron-fluid text-white text-center">
-                <div class="jumbotron jumbotron-fluid">
-                    <div class="container">
-                        <h1 class="display-4">E3Bomaas</h1>
-                        <p class="lead">Kebab - Smakowita Podróż do Orientu!</p>
-                    </div>
-                </div>
+    <div class="container-fluid">
+        <!-- Фоновое изображение на весь экран -->
+        <div class="row">
+            <div class="col-md-12 background-image">
                 <!-- Заголовок и слоган -->
                 <div class="jumbotron jumbotron-fluid text-white text-center">
-                    <div class="container">
-                        <p class="lead ">Odwiedź naszą niezwykłą kebabową restaurację - pierwszą w Warszawie! Oferujemy
-                            niepowtarzalny smak Orientu, który rozgrzeje Twoje podniebienie. Przyjdź i odkryj unikalne
-                            połączenie tradycyjnych przypraw i świeżych składników w naszych autorskich kebabach.</p>
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">E3Bomaas</h1>
+                            <p class="lead">Kebab - Smakowita Podróż do Orientu!</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Блоки с товарами -->
-        <div class="row mt-5">
-            {% for product in products %}
-                <div class="col-lg-4 mb-4">
-                    <div class="card">
-                        <img src="{{ MEDIA_URL }}{{ product.picture.url }}" class="card-img-top"
-                             alt="{{ product.title }}" height="100%">
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{ product.title }}</h5>
-                            <p class="card-text">{{ product.description }}</p>
-                            <p class="card-text">{{ product.price }}</p>
-                            <a href="#" class="btn btn-primary">Добавить в корзину</a>
+                    <!-- Заголовок и слоган -->
+                    <div class="jumbotron jumbotron-fluid text-white text-center">
+                        <div class="container">
+                            <p class="lead ">Odwiedź naszą niezwykłą kebabową restaurację - pierwszą w Warszawie!
+                                Oferujemy
+                                niepowtarzalny smak Orientu, który rozgrzeje Twoje podniebienie. Przyjdź i odkryj
+                                unikalne
+                                połączenie tradycyjnych przypraw i świeżych składników w naszych autorskich
+                                kebabach.</p>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
+
+            <!-- Блоки с товарами -->
+            <div class="row p-3">
+                {% for product in products %}
+                    <div class="col-lg-4 mb-4">
+                        <div class="card">
+                            <img src="{{ MEDIA_URL }}{{ product.picture.url }}" class="card-img-top"
+                                 alt="{{ product.title }}" height="100%">
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.title }}</h5>
+                                <p class="card-text">{{ product.description }}</p>
+                                <p class="card-text">{{ product.price }}</p>
+                                <form action="{% url 'add_to_cart' product.id %}" method="post"
+                                      class="add-to-cart-form">
+                                    {% csrf_token %}
+                                    <input type="number" name="quantity" value="1" min="1">
+                                    <button type="submit">Добавить в корзину</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
+
+        <style>
+            .navbar {
+                margin-bottom: -20px; /* Устанавливаем отрицательный отступ для навбара */
+            }
+
+            .background-image {
+                margin-top: -20px; /* Устанавливаем отрицательный отступ для изображения */
+                height: calc(100vh + 20px); /* Учитываем отрицательный отступ */
+                background-image: url({% static 'images/other/first_background.jpg' %});
+                background-size: cover;
+                background-position: center;
+            }
+
+
+            .jumbotron {
+                background-color: rgba(0, 0, 0, 0.0);
+            }
+        </style>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('form.add-to-cart-form').on('submit', function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var url = form.attr('action');
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: form.serialize(),
+                    success: function (data) {
+                        alert('Товар добавлен в корзину. Всего товаров: ' + data.total_items);
+                        // Обновите здесь любые элементы UI, например количество товаров в иконке корзины
+                    }
+                });
+            });
+        });
 
-    <style>
-        .navbar {
-            margin-bottom: -20px; /* Устанавливаем отрицательный отступ для навбара */
-        }
+    </script>
+    <script>
+        $(document).on('submit', '.add-to-cart-form', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function (response) {
+                    // Обновите здесь блок с корзиной
+                    // Например, обновите количество товаров и общую сумму в корзине
+                    $('#cart-count').text(response.total_items);
+                    // Можете добавить ещё что-то, например обновление списка товаров в корзине
+                }
+            });
+        });
+    </script>
 
-        .background-image {
-            margin-top: -20px; /* Устанавливаем отрицательный отступ для изображения */
-            height: calc(100vh + 20px); /* Учитываем отрицательный отступ */
-            background-image: url({% static 'images/other/first_background.jpg' %});
-            background-size: cover;
-            background-position: center;
-        }
-        
-
-        .jumbotron {
-            background-color: rgba(0, 0, 0, 0.0);
-        }
-    </style>
 {% endblock %}

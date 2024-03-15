@@ -7,7 +7,7 @@
     <!-- Подключение Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* CSS для фиксированного навбара */
+        /* Существующие стили */
         body {
             padding-top: 56px;
         }
@@ -18,25 +18,27 @@
             }
         }
 
-        /* Настройка цвета и стилей навбара */
         .navbar-custom {
-            background-color: #5484b3; /* Цвет фона */
-            color: #ffffff; /* Цвет текста */
+            background-color: #5484b3;
+            color: #ffffff;
         }
 
         .navbar-custom .navbar-brand, .navbar-custom .navbar-nav .nav-link {
-            color: #ffffff; /* Цвет ссылок и текста бренда */
+            color: #ffffff;
         }
 
         .navbar-custom .navbar-nav .nav-link:hover {
-            color: #aaaaaa; /* Цвет ссылок при наведении */
+            color: #aaaaaa;
         }
 
+        /* Стили для модального окна корзины */
+        #cartModal .modal-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
     </style>
-
 </head>
 <body>
-<!-- Хедер сайта -->
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top navbar-custom">
         <a class="navbar-brand" href="#">E3Boomas</a>
@@ -46,7 +48,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <!--пункты меню -->
+                <!-- Существующие пункты меню -->
                 <li class="nav-item">
                     <a class="nav-link" href="#">home</a>
                 </li>
@@ -56,54 +58,58 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">contact us</a>
                 </li>
+                <!-- Кнопка корзины -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="cart-button">Корзина (<span id="cart-count">0</span>)</a>
+                </li>
             </ul>
         </div>
     </nav>
 </header>
 
-<!-- Основное содержимое страницы -->
 <main>
     {% block content %}
         <!-- Это место для содержимого каждой отдельной страницы -->
     {% endblock %}
 </main>
 
-<!-- Футер сайта -->
 <footer class="footer mt-auto py-3 bg-dark text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <h5>contacts</h5>
-                <p>phone: +48 451 694 419</p>
-                <p>Email: e3bom@example.com</p>
+    <!-- Содержимое футера -->
+</footer>
+
+<!-- Модальное окно корзины -->
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cartModalLabel">Ваша корзина</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col-lg-4">
-                <h5>info</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">home</a></li>
-                    <li><a href="#">about</a></li>
-                    <li><a href="#">contacts</a></li>
-                </ul>
+            <div class="modal-body">
+                <!-- Содержимое корзины будет загружаться сюда -->
             </div>
-            <div class="col-lg-4">
-                <h5>Podpisać się</h5>
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="example@gmail.com">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Podpisz się</button>
-                </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Продолжить покупки</button>
+                <button type="button" class="btn btn-primary">Оформить заказ</button>
             </div>
         </div>
     </div>
-    <div class="container text-center mt-3">
-        <span class="text-muted">© 2024 E3Bomaas</span>
-    </div>
-</footer>
+</div>
 
 <!-- Подключение Bootstrap JS и скриптов -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Пример JavaScript для управления модальным окном корзины
+    $(document).ready(function () {
+        $('#cart-button').click(function () {
+            $('#cartModal').modal('show');
+            // Загрузите содержимое корзины AJAX'ом и отобразите здесь
+        });
+    });
+</script>
 </body>
 </html>
